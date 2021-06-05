@@ -1,0 +1,15 @@
+Solutions
+
+1.
+for i in range(0, 7):
+    for j in range(0, i + 1):
+        print(" * ", end='')
+    print("\r")
+for m in range(0, 6):
+    for k in range(0, 6- m):
+        print(" * ", end='')
+    print("\r")
+
+2.
+a=input("Enter a name:")
+print(a[::-1])
