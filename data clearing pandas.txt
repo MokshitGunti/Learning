@@ -1,0 +1,34 @@
+import pandas as pd
+import numpy as np
+
+df = pd.DataFrame({'From_To': ['LoNDon_paris', 'MAdrid_miLAN',
+'londON_StockhOlm',
+
+'Budapest_PaRis', 'Brussels_londOn'],
+'FlightNumber': [10045, np.nan, 10065, np.nan, 10085],
+'RecentDelays': [[23, 47], [], [24, 43, 87], [13], [67, 32]],
+'Airline': ['KLM(!)', '<Air France> (12)', '(British Airways. )',
+'12. Air France', '"Swiss Air"']})
+
+1.
+df['FlightNumber']=(df['FlightNumber'].ffill()+df.groupby(df.FlightNumber.notnull().cumsum()).cumcount()*10).astype('int64')
+
+
+2.
+new=df["From_To"].str.split("_", n = 1, expand = True)
+df['From']=new[0]
+df['To']=new[1]
+df.drop(columns='From_To',inplace=True)
+df
+
+3.
+df['From'].str.title()
+df['To'].str.title()
+
+4.
+new1=pd.DataFrame(df['RecentDelays'].to_list(), columns=['delay_1','delay_2','delay_3'])
+df['delay_1']=new1['delay_1']
+df['delay_2']=new1['delay_2']
+df['delay_3']=new1['delay_3']
+df.drop(columns='RecentDelays',inplace=True)
+df
